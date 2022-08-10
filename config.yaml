@@ -1,0 +1,18 @@
+server:
+   port: 5555
+   
+adapter:
+   port: 35000
+   ip: "192.168.0.10"
+    
+overrides:
+   - 
+      key: 3E00 
+      value: 7E00
+   - 
+      key: 3 
+      value: 7E00
+   - 
+      key: E00 
+      value: 7E00
+      
