@@ -12,6 +12,6 @@ public class Runner {
 
 		final Settings settings = SettingsLoader.settings();
 		log.info("Starting service with the settings: {}", settings);
-		new Server(settings).launch();
+		new Server().launch(settings);
 	}
 }
