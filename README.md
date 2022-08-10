@@ -4,8 +4,8 @@
 
 ## About
 
-`ELM327 TCP Proxy` is a simple TCP Reverse Proxy server intended to enhance quality of connection between Wifi ELM327 Obd2 adapters and applications dedicated for vehicle diagnosis which use Wifi connections.
-Application allows to bypass some of the commands which are not supported by adapter and cause connection is not dropped. 
+`ELM327 TCP Proxy` is a simple TCP Reverse Proxy server intended to increase quality of the connection between Wifi ELM327 Obd2 adapters and applications dedicated for vehicle diagnosis which use Wifi connections.
+Application allows to bypass some of the commands which are not supported by the adapter and ensure connection is not dropped. 
 
 ### Features
 
