@@ -17,5 +17,4 @@ final class WriteAndFlushListener implements ChannelFutureListener {
 			ctx.channel().close();
 		}
 	}
-
 }

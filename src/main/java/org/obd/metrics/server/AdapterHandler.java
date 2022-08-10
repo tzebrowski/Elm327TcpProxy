@@ -33,12 +33,12 @@ final class AdapterHandler extends ChannelInboundHandlerAdapter {
 
 	@Override
 	public void channelInactive(ChannelHandlerContext ctx) {
-		ChannelUtils.closeOnFlush(inboundChannel);
+		Channels.flushAndClose(inboundChannel);
 	}
 
 	@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
 		cause.printStackTrace();
-		ChannelUtils.closeOnFlush(ctx.channel());
+		Channels.flushAndClose(ctx.channel());
 	}
 }

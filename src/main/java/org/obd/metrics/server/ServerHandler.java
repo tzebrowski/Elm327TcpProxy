@@ -25,9 +25,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 	
 	@Override
 	public void channelActive(ChannelHandlerContext context) {
-		settings.getOverrides().stream().forEach(o -> {
-			overrides.put(o.getKey() + "\r", o.getValue());
-		});
+		loadOverrides();
 		
 		
 		final Channel serverChannel = context.channel();
@@ -35,15 +33,17 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 		final Bootstrap bootstrap = new Bootstrap();
 
 		bootstrap.group(serverChannel.eventLoop())
-				.channel(context.channel().getClass())
-				.handler(new AdapterInitializer(serverChannel))
-				.option(ChannelOption.AUTO_READ, true);
+				 .channel(context.channel().getClass())
+				 .handler(new AdapterInitializer(serverChannel))
+				 .option(ChannelOption.AUTO_READ, true);
 
 		final Host adapterHost = settings.getAdapter();
-		final ChannelFuture outboundChannelFuture = bootstrap.connect(adapterHost.getIp(), adapterHost.getPort());
-		adapterChannel = outboundChannelFuture.channel();
-		outboundChannelFuture.addListener(new WriteAndFlushListener(context));
+		final ChannelFuture future = bootstrap.connect(adapterHost.getIp(), adapterHost.getPort());
+		adapterChannel = future.channel();
+		future.addListener(new WriteAndFlushListener(context));
 	}
+
+
 
 	@Override
 	public void channelRead(final ChannelHandlerContext context, Object msg) throws Exception {
@@ -71,12 +71,18 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 
 	@Override
 	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-		ChannelUtils.closeOnFlush(adapterChannel);
+		Channels.flushAndClose(adapterChannel);
 	}
 
 	@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
 		log.error("Server error filed.", cause);
-		ChannelUtils.closeOnFlush(ctx.channel());
+		Channels.flushAndClose(ctx.channel());
+	}
+	
+	private void loadOverrides() {
+		settings.getOverrides().stream().forEach(o -> {
+			overrides.put(o.getKey() + "\r", o.getValue());
+		});
 	}
 }

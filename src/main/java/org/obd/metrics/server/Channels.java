@@ -7,9 +7,9 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-final class ChannelUtils {
+final class Channels {
 
-	static void closeOnFlush(Channel channel) {
+	static void flushAndClose(Channel channel) {
 		if (channel != null && channel.isActive()) {
 			channel.writeAndFlush(Unpooled.EMPTY_BUFFER)
 			.addListener(ChannelFutureListener.CLOSE);
