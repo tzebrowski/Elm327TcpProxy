@@ -10,7 +10,7 @@ final class AdapterInitializer extends ChannelInitializer<SocketChannel> {
 	private final Channel serverChannel;
 
 	@Override
-	protected void initChannel(SocketChannel socketChannel) throws Exception {
+	protected void initChannel(SocketChannel socketChannel) {
 		socketChannel.pipeline().addLast(new AdapterHandler(serverChannel));
 	}
 }

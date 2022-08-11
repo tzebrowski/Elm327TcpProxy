@@ -18,7 +18,11 @@ final class SettingsLoader {
 
 	static Settings settings() throws FileNotFoundException {
 		final Yaml yaml = new Yaml(new Constructor(Settings.class));
-		InputStream inputStream = null;
+		return yaml.load(getFileStream());
+	}
+
+	private static InputStream getFileStream() throws FileNotFoundException {
+		InputStream inputStream;
 		File file = new File(SETTINGS_FILE_NAME);
 		if (file.exists()) {
 			inputStream = new FileInputStream(file);
@@ -26,6 +30,6 @@ final class SettingsLoader {
 			log.warn("Could not find: '{}' in the local dir. Loading default configuration.", SETTINGS_FILE_NAME);
 			inputStream = Settings.class.getResourceAsStream("/" + SETTINGS_FILE_NAME);
 		}
-		return yaml.load(inputStream);
+		return inputStream;
 	}
 }

@@ -8,7 +8,7 @@ import org.obd.metrics.proxy.model.Settings;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class Runner {
+public class Launcher {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 

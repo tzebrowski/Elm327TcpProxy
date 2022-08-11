@@ -56,7 +56,7 @@
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<mainClass>org.obd.metrics.proxy.Runner</mainClass>
+							<mainClass>org.obd.metrics.proxy.Launcher</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

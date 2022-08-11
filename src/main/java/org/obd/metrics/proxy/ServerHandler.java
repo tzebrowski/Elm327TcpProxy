@@ -49,7 +49,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 
 
 	@Override
-	public void channelRead(final ChannelHandlerContext context, Object msg) throws Exception {
+	public void channelRead(final ChannelHandlerContext context, Object msg) {
 		if (adapterChannel.isActive()) {
 
 			if (msg instanceof ByteBuf) {
@@ -73,13 +73,13 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 	}
 
 	@Override
-	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+	public void channelInactive(ChannelHandlerContext ctx) {
 		Channels.flushAndClose(adapterChannel);
 	}
 
 	@Override
-	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-		log.error("Server error filed.", cause);
+	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+		log.error("Server error failed", cause);
 		Channels.flushAndClose(ctx.channel());
 	}
 	

@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 public class AdapterResponseLoggingHandler extends ChannelDuplexHandler {
 
 	@Override
-	public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
+	public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) {
 		log.info(format("RX:", msg).replace("\r", "") + "\n");
 		ctx.write(msg, promise);
 	}
