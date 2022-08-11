@@ -1,4 +1,4 @@
-package org.obd.metrics.proxy;
+package org.obd.metrics.proxy.model;
 
 import java.util.List;
 

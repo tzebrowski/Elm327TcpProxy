@@ -1,5 +1,7 @@
 package org.obd.metrics.proxy;
 
+import org.obd.metrics.proxy.model.Settings;
+
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;

@@ -3,6 +3,8 @@ package org.obd.metrics.proxy;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import org.obd.metrics.proxy.model.Settings;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

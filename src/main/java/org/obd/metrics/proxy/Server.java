@@ -1,5 +1,7 @@
 package org.obd.metrics.proxy;
 
+import org.obd.metrics.proxy.model.Settings;
+
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelOption;
@@ -18,26 +20,27 @@ final class Server {
 		final EventLoopGroup eventLoopGroup = new NioEventLoopGroup(10);
 
 		try {
+			
+			final ServerBootstrap serverBootstrap = new ServerBootstrap();
+			final Channel channel = serverBootstrap
+					.group(eventLoopGroup)
+					.channel(NioServerSocketChannel.class)
+					.childHandler(new ServerChannelInitializer(settings))
+					.childOption(ChannelOption.AUTO_READ, false)
+					.bind(settings.getServer().getPort())
+					.sync()
+					.channel();
 
-			try {
-				final ServerBootstrap serverBootstrap = new ServerBootstrap();
-				final Channel channel = serverBootstrap
-						.group(eventLoopGroup)
-						.channel(NioServerSocketChannel.class)
-						.childHandler(new ServerChannelInitializer(settings))
-						.childOption(ChannelOption.AUTO_READ, false)
-						.bind(settings.getServer().getPort())
-						.sync()
-						.channel();
+			channel.closeFuture().sync();
+			log.info("Server started.");
 
-				channel.closeFuture().sync();
-				log.info("Server started.");
-
-			} catch (InterruptedException e) {
-				log.error("Exception caught", e);
-			}
+		} catch (InterruptedException e) {
+			log.error("Exception caught", e);
 		} finally {
-			eventLoopGroup.shutdownGracefully();
+			if (eventLoopGroup != null) {
+				log.info("Closing server.");
+				eventLoopGroup.shutdownGracefully();
+			}
 		}
 	}
 }

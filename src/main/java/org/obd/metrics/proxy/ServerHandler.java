@@ -4,6 +4,9 @@ import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.obd.metrics.proxy.model.Host;
+import org.obd.metrics.proxy.model.Settings;
+
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
