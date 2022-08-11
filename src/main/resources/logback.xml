@@ -5,14 +5,15 @@
 			<pattern>%msg%n</pattern>
 		</encoder>
 	</appender>
+	<timestamp key="timestamp" datePattern="yyyyMMddHHmmss"/>
 	
-	 <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-	      <file>log.txt</file>
+	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
+	      <file>./logs/log_${timestamp}.txt</file>
 	      <append>true</append>
 	      <encoder>
 	         <pattern>%msg%n</pattern>
 	      </encoder>
-	   </appender>
+	</appender>
 	
 	<root level="INFO">
 		<appender-ref ref="FILE" />
