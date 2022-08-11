@@ -13,16 +13,25 @@ Application allows to bypass some of the commands which are not supported by the
 * Dumping communication between Adapter and Application to the log file.
 
 
-### Running
+### Building and running
+
+Build command
 
 ```
-	java -jar elm327-tcp-proxy-0.0.1-SNAPSHOT-jar-with-dependencies.jar
+	mvn clean install
+```
+
+
+Run command
+
+```
+	java -jar target/elm327-tcp-proxy-0.0.1-SNAPSHOT-jar-with-dependencies.jar
 ```
 
 
 ### Configuration
 
-Server during startup is looking for configuration within execution dir. File should be named `config.yaml` and contains configuration like bellow.
+Server during startup is looking for configuration within execution dir. File should be named `config.yaml` and contains configuration like bellow. If file does not exists in the specified location, default one is loaded.
 
 ```
 server:
