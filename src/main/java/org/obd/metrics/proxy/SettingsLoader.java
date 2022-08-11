@@ -1,4 +1,4 @@
-package org.obd.metrics.server;
+package org.obd.metrics.proxy;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

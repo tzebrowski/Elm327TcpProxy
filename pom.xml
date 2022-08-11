@@ -56,7 +56,7 @@
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<mainClass>org.obd.metrics.server.Runner</mainClass>
+							<mainClass>org.obd.metrics.proxy.Runner</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
@@ -85,8 +85,6 @@
 			<artifactId>netty-all</artifactId>
 			<version>4.1.79.Final</version>
 		</dependency>
-
-
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-collections4</artifactId>

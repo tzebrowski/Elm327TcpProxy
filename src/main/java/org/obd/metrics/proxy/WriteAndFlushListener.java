@@ -1,4 +1,4 @@
-package org.obd.metrics.server;
+package org.obd.metrics.proxy;
 
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;

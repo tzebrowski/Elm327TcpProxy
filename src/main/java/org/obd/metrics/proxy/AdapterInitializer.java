@@ -1,4 +1,4 @@
-package org.obd.metrics.server;
+package org.obd.metrics.proxy;
 
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
