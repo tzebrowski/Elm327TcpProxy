@@ -49,20 +49,6 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 		future.addListener(new WriteAndFlushListener(context));
 	}
 
-	private void startBackgroundTask() {
-		new Thread(() -> {
-			while (true) {
-				try {
-					Thread.sleep(TASK_DELAY);
-					settings =  SettingsLoader.settings();
-					loadOverrides();
-				} catch (InterruptedException | FileNotFoundException e) {
-					log.error("Failed to load file",e);
-				}
-			}
-			
-		}).start();
-	}
 
 	@Override
 	public void channelRead(final ChannelHandlerContext context, Object msg) {
@@ -72,15 +58,21 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 				final WriteAndFlushListener writeAndFlushListener = new WriteAndFlushListener(context);
 
 				final String messageContent = ((ByteBuf) msg).toString(Charset.defaultCharset());
+				final String endCharacters = "\r\n>\r\n";
+				
 				log.info("TX: {}", messageContent);
 
 				if (overrides.containsKey(messageContent)) {
 					final String response = overrides.get(messageContent);
-					final ByteBuf in = Unpooled.copiedBuffer((response + "\r\n>\r\n").getBytes());
+					final ByteBuf in = Unpooled.copiedBuffer((response + endCharacters).getBytes());
 					context.channel().writeAndFlush(in).addListener(writeAndFlushListener);
 				} else {
-					final ByteBuf in = Unpooled.copiedBuffer( (((ByteBuf) msg).toString(Charset.defaultCharset()) +  "\r\n>\r\n").getBytes());
-					adapterChannel.writeAndFlush(in).addListener(writeAndFlushListener);
+					if (messageContent.contains(">")) {
+						adapterChannel.writeAndFlush(msg).addListener(writeAndFlushListener);
+					} else {
+						final ByteBuf in = Unpooled.copiedBuffer((messageContent +  endCharacters).getBytes());
+						adapterChannel.writeAndFlush(in).addListener(writeAndFlushListener);
+					}
 				}
 			}
 		} else {
@@ -104,5 +96,21 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 		settings.getOverrides().stream().forEach(o -> {
 			overrides.put(o.getKey() + "\r", o.getValue());
 		});
+	}
+	
+
+	private void startBackgroundTask() {
+		new Thread(() -> {
+			while (true) {
+				try {
+					Thread.sleep(TASK_DELAY);
+					settings =  SettingsLoader.settings();
+					loadOverrides();
+				} catch (InterruptedException | FileNotFoundException e) {
+					log.error("Failed to load file",e);
+				}
+			}
+			
+		}).start();
 	}
 }
