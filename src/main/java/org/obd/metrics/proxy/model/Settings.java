@@ -10,7 +10,8 @@ import lombok.ToString;
 @Getter
 @Setter
 public final class Settings {
-
+	
+	private ServerType serverType = ServerType.ECHO;
 	private List<Overrides> overrides;
 	private Host adapter;
 	private Host server;

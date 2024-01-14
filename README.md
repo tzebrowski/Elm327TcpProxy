@@ -4,7 +4,7 @@
 
 ## About
 
-`ELM327 TCP Proxy` is a simple TCP Reverse Proxy server intended to increase quality of the connection between Wifi ELM327 Obd2 adapters and applications dedicated for vehicle diagnosis which use Wifi connections.
+`ELM327 TCP Proxy` is a simple TCP server which might work in to distinct modes: `EchoServer` and `Proxy`. Server is intended to increase quality of the connection between Wifi ELM327 Obd2 adapters and applications dedicated for vehicle diagnosis which use Wifi connections.
 Application allows to bypass some of the commands which are not supported by the adapter and ensure connection is not dropped. 
 
 ### Features
@@ -33,15 +33,30 @@ Run command
 
 Server during startup is looking for configuration within execution dir. File should be named `config.yaml` and contains configuration like bellow. If file does not exists in the specified location, default one is loaded.
 
+#### Echo Server
+
+Example config for Echo Server
+
 ```
 server:
    port: 5555
+
+serverType: ECHO
    
 adapter:
    port: 35000
    ip: "192.168.0.10"
     
 overrides:
+   
+   - 
+      key: ATZ 
+      value: ELM327 v1.4b
+   
+   -
+      key: AT@1
+      value: OBD SOLUTIONS LLC
+      
    - 
       key: 3E00 
       value: 7E00
@@ -51,4 +66,4 @@ overrides:
    - 
       key: E00 
       value: 7E00
-```      
+```

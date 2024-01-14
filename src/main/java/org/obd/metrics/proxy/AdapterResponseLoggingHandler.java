@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Sharable
-public class AdapterResponseLoggingHandler extends ChannelDuplexHandler {
+final class AdapterResponseLoggingHandler extends ChannelDuplexHandler {
 
 	@Override
 	public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) {
