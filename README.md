@@ -4,13 +4,15 @@
 
 ## About
 
-`ELM327 TCP Proxy` is a simple TCP server which might work in to distinct modes: `EchoServer` and `Proxy`. Server is intended to increase quality of the connection between Wifi ELM327 Obd2 adapters and applications dedicated for vehicle diagnosis which use Wifi connections.
+`ELM327 TCP Proxy` is a simple TCP server which might work in two distinct modes: `EchoServer` and `ProxyServer`. 
+Server is intended to increase quality of the connection between Wifi ELM327 Obd2 adapters and applications dedicated for vehicle diagnosis which use Wifi connections.
 Application allows to bypass some of the commands which are not supported by the adapter and ensure connection is not dropped. 
 
 ### Features
 
 * Overriding CAN/AT commands
-* Dumping communication between Adapter and Application to the log file.
+* Dumping communication between Elm327 adapter and Application to the log file.
+* Acting as mock-server
 
 
 ### Building and running
