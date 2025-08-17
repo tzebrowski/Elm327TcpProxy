@@ -15,4 +15,72 @@ overrides:
    - 
       key: E00 
       value: 7E00
+   
+   - 
+      key: ATZ 
+      value: OK
+   - 
+      key: ATPP2CSV01 
+      value: OK
+   - 
+      key: ATPP2CON 
+      value: OK   
+      
+   - 
+      key: ATPP2DSV01 
+      value: OK   
+      
+   - 
+      key: ATPP2DON 
+      value: OK
+      
+   - 
+      key: ATV1 
+      value: OK
+      
+   - 
+      key: ATE0 
+      value: OK     
+          
+   - 
+      key: ATL0 
+      value: OK     
+   - 
+      key: ATSPB 
+      value: OK
+      
+   - 
+      key: ATS0 
+      value: OK     
+          
+   - 
+      key: ATAL 
+      value: OK 
+          
+   - 
+      key: ATCP18 
+      value: OK 
+      
+   - 
+      key:  ATCRA18DAF110 
+      value: OK 
+      
+   - 
+      key: ATSHDA10F1 
+      value: OK 
+   - 
+      key: ATAT1 
+      value: OK 
+      
+   - 
+      key: ATST99 
+      value: OK 
+      
+   - 
+      key: 1003 
+      value: 5003003201F4 
+      
+   - 
+      key: 22196D 
+      value: 62196DCCFF 
       
